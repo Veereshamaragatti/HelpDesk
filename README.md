@@ -27,6 +27,135 @@ The HelpDesk Management System is a web application designed to facilitate knowl
 - MySQL 8.0 or higher
 - Maven 3.6 or higher
 
+## Setup and Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Veereshamaragatti/HelpDesk.git
+cd HelpDesk/helpdesk
+```
+
+### 2. Configure MySQL Database
+
+Start MySQL server and create a database (the application will auto-create it if it doesn't exist):
+
+```bash
+# Start MySQL server (varies by OS)
+# For Linux/Mac:
+sudo service mysql start
+# For Windows:
+net start MySQL80
+
+# Login to MySQL
+mysql -u root -p
+
+# The application will automatically create the 'helpdesk' database
+# But you can also create it manually:
+CREATE DATABASE helpdesk;
+exit;
+```
+
+### 3. Configure Database Connection
+
+Update the database credentials in `src/main/resources/application.properties` if your MySQL credentials are different:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/helpdesk?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=root
+```
+
+### 4. Build the Project
+
+```bash
+# Using Maven wrapper (recommended)
+./mvnw clean install
+
+# Or using system Maven
+mvn clean install
+```
+
+## Running the Application
+
+### Option 1: Using Maven
+
+```bash
+# Using Maven wrapper
+./mvnw spring-boot:run
+
+# Or using system Maven
+mvn spring-boot:run
+```
+
+### Option 2: Using Java
+
+```bash
+# First build the JAR file
+./mvnw clean package
+
+# Then run the JAR
+java -jar target/helpdesk-0.0.1-SNAPSHOT.jar
+```
+
+### Option 3: Using IDE
+
+1. Import the project as a Maven project in your IDE (IntelliJ IDEA, Eclipse, VS Code)
+2. Locate the main class: `com.helpdesk.HelpdeskApplication`
+3. Run the `HelpdeskApplication` class
+
+## Accessing the Application
+
+Once the application is running, you can access it at:
+
+- **Application URL**: http://localhost:8080
+- **Default Port**: 8080
+
+### Initial Access
+
+The application will automatically initialize with default admin credentials:
+- **Username**: admin
+- **Password**: admin
+
+You can register new users through the registration page.
+
+## Stopping the Application
+
+- If running via Maven: Press `Ctrl+C` in the terminal
+- If running as JAR: Press `Ctrl+C` in the terminal
+- If running via IDE: Click the stop button in your IDE
+
+## Troubleshooting
+
+### Common Issues
+
+**1. Port 8080 is already in use**
+```bash
+# Change the port in application.properties
+server.port=8081
+```
+
+**2. MySQL Connection Error**
+- Ensure MySQL server is running
+- Verify database credentials in `application.properties`
+- Check if MySQL is running on port 3306
+
+**3. Maven Build Fails**
+```bash
+# Clean Maven cache and rebuild
+./mvnw clean install -U
+```
+
+**4. Database Tables Not Created**
+- The application uses `spring.jpa.hibernate.ddl-auto=update`
+- Tables will be auto-created on first run
+- Check MySQL logs if tables are not created
+
+**5. Lombok Compilation Errors**
+- Ensure Lombok plugin is installed in your IDE
+- For IntelliJ IDEA: Install Lombok plugin and enable annotation processing
+- For Eclipse: Install Lombok and restart the IDE
+
 ## Key Features
 
 ### Major Use Cases
