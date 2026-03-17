@@ -129,7 +129,7 @@ Category ──< Post
 | **Authentication** | Custom `UserDetailsService` loads user from DB; login form via Spring Security |
 | **Password Storage** | BCrypt hashing (`BCryptPasswordEncoder`) |
 | **Authorization** | `ROLE_USER`, `ROLE_ADMIN`; method-level security with `@PreAuthorize("hasRole('ADMIN')")` |
-| **CSRF Protection** | Enabled by default in Spring Security 6 |
+| **CSRF Protection** | Disabled in current config for development convenience; should be re-enabled for production with CSRF token headers on AJAX requests |
 | **Account Status** | `ACTIVE`, `SUSPENDED`, `BANNED` — checked at login time via custom authentication provider |
 | **Session Management** | Server-side sessions managed by Spring Security |
 
